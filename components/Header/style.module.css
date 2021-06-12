@@ -1,0 +1,3 @@
+.header {
+  @apply px-14 py-4 flex justify-between items-center;
+}

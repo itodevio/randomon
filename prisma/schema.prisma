@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Pokemon {
+  id                Int           @id
+  name              String
+  pokedex_number    Int
+  types             Type[]        @relation()
+  image_url         String?
+  // abilities         Ability[]
+  // from_evolutions   Evolution[]   @relation("From")
+  // to_evolutions     Evolution[]   @relation("To")
+}
+
+model Type {
+  id                        Int           @default(autoincrement())         @id
+  strong_against            Type[]        @relation("StrongAgainst")
+  weak_against              Type[]        @relation("WeakAgainst")
+  pokemons                  Pokemon[]
+  // moves                     Move[]
+
+  // ignorable relations
+  strong_against_relation   Type[]        @relation("StrongAgainst")
+  weak_against_relation     Type[]        @relation("WeakAgainst")
+}
+
+// model Ability {
+//   id              Int           @default(autoincrement())           @id
+//   description     String?
+//   hidden          Boolean       @default(false)
+//   pokemons        Pokemon[]
+// }
+
+// model Evolution {
+//   id              Int           @default(autoincrement())           @id
+//   from            Pokemon       @relation("From", fields: [from_id], references: [id])
+//   from_id         Int
+//   to              Pokemon       @relation("To", fields: [to_id], references: [id])
+//   to_id           Int
+//   method          String
+// }
+
+// model Move {
+//   id              Int           @default(autoincrement())           @id
+//   type            Type          @relation(fields: [type_id], references: [id])
+//   type_id         Int
+// }
