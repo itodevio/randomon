@@ -17,7 +17,7 @@ const Home: React.FC<Props> = (props) => {
         {
           props.pokemons.map(pokemon => (
             <Card key={pokemon.name} width="small" justify="center" align="center" pad="medium" margin="small" responsive>
-              <CardHeader>{pokemon.name}</CardHeader>
+              <CardHeader className="font-semibold">{pokemon.name}</CardHeader>
               <CardBody>
                 <img src={pokemon.image_url} alt={`${pokemon.name}`} />
               </CardBody>
