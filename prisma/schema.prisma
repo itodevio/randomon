@@ -11,7 +11,7 @@ generator client {
 }
 
 model Pokemon {
-  id                Int           @id
+  id                Int           @default(autoincrement())   @id
   name              String
   pokedex_number    Int
   types             Type[]        @relation()

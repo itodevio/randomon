@@ -20,15 +20,6 @@ body {
   background: @apply bg-gray-400;
 }
 
-input,
-textarea {
-  font-size: 16px;
-}
-
-button {
-  cursor: pointer;
-}
-
 @tailwind components;
 
 @tailwind utilities;

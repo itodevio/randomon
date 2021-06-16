@@ -1,17 +1,16 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
+import React from 'react';
+import Link from 'next/link';
 
 import { Button } from 'grommet';
 
-import style from './style.module.css';
+import style from './layout.module.scss';
 
 const Header: React.FC = () => {
   return (
     <nav className={style['header']}>
       <Link href="/">
         <a>
-          <Image 
+          <img 
             src="/logo_bat.png"
             alt="website logo"
             width={75}
@@ -19,17 +18,17 @@ const Header: React.FC = () => {
           />
         </a>
       </Link>
-      <div>
+      <div className={style['right-side-header']}>
         <Link href="/">
-          <a className="mr-10">
+          <a>
             <Button primary label="Randomize!" />
           </a>
         </Link>
         <Link href="/about">
-          <a className="mr-10">About</a>
+          <a>About</a>
         </Link>
         <Link href="/contact">
-          <a className="mr-10">Contact</a>
+          <a>Contact</a>
         </Link>
       </div>
     </nav>
