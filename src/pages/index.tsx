@@ -16,7 +16,7 @@ const Home: React.FC<Props> = (props) => {
       <div className="flex flex-wrap justify-center">
         {
           props.pokemons.map(pokemon => (
-            <Card key={pokemon.name} justify="center" align="center" pad="medium" margin="small">
+            <Card key={pokemon.name} width="small" justify="center" align="center" pad="medium" margin="small" responsive>
               <CardHeader>{pokemon.name}</CardHeader>
               <CardBody>
                 <img src={pokemon.image_url} alt={`${pokemon.name}`} />
@@ -32,7 +32,11 @@ const Home: React.FC<Props> = (props) => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const prisma = new PrismaClient();
 
-  const pokemons = await prisma.pokemon.findMany();
+  const pokemons = await prisma.pokemon.findMany({
+    orderBy: {
+      pokedex_number: 'asc'
+    }
+  });
 
   return { props: { pokemons } };
 }
