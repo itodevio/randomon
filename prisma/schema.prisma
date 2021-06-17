@@ -13,7 +13,7 @@ generator client {
 model Pokemon {
   id                Int           @default(autoincrement())   @id
   name              String
-  pokedex_number    Int
+  pokedex_number    Int           @unique
   types             Type[]        @relation()
   image_url         String?
   // abilities         Ability[]
@@ -23,6 +23,7 @@ model Pokemon {
 
 model Type {
   id                        Int           @default(autoincrement())         @id
+  name                      String
   strong_against            Type[]        @relation("StrongAgainst")
   weak_against              Type[]        @relation("WeakAgainst")
   pokemons                  Pokemon[]

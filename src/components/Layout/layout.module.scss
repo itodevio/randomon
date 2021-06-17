@@ -1,12 +1,7 @@
-.header {
-  @apply px-4 md:px-14 py-4 flex justify-between items-center;
-
-}
-
 .right-side-header {
   @apply flex items-center;
 
   a {
-    @apply mr-2 md:mr-10;
+    @apply mr-6 md:mr-10;
   }
 }

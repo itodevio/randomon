@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 import Header from './Header';
+import Footer from './Footer';
+import { Box } from 'grommet';
 import style from './layout.module.scss';
 
 type Props = {
@@ -7,10 +9,11 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = (props) => (
-  <div className="h-screen">
+  <Box fill>
     <Header />
-    <div className="h-full">{props.children}</div>
-  </div>
+    <Box overflow="auto" flex>{props.children}</Box>
+    <Footer />
+  </Box>
 );
 
 export default Layout;

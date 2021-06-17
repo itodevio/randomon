@@ -1,42 +1,58 @@
-import React from 'react'
-import { GetStaticProps } from 'next'
-import { PrismaClient } from '@prisma/client';
-import Layout from 'components/Layout'
-
+import React, { useState, useEffect, useCallback } from 'react';
+import { GetStaticProps } from 'next';
+import Layout from 'components/Layout';
+import * as db from 'db';
 import { Pokemon } from 'interfaces';
-import { Grid, Card, CardBody, CardHeader } from 'grommet';
+import PokemonCard from 'components/Pokemon/card';
+import { Button } from 'grommet';
 
 type Props = {
   pokemons: Pokemon[]
 }
 
 const Home: React.FC<Props> = (props) => {
+  const [team, setTeam] = useState([]);
+
+  const select_team = useCallback(() => {
+    const count = props.pokemons.length;
+    const ids = [];
+    const new_team = [];
+
+    while (ids.length < 6) {
+      const n = Math.floor(Math.random() * (count + 1));
+
+      if (!ids.includes(n)) {
+        ids.push(n);
+        new_team.push(props.pokemons[n]);
+      }
+    }
+
+    setTeam(new_team)
+  }, [])
+
+  useEffect(() => {
+    select_team()
+  }, [])
+
   return (
     <Layout>
-      <div className="flex flex-wrap justify-center">
-        {
-          props.pokemons.map(pokemon => (
-            <Card key={pokemon.name} width="small" justify="center" align="center" pad="medium" margin="small" responsive>
-              <CardHeader className="font-semibold">{pokemon.name}</CardHeader>
-              <CardBody>
-                <img src={pokemon.image_url} alt={`${pokemon.name}`} />
-              </CardBody>
-            </Card>
-          ))
-        }
+      <div className="flex flex-col">
+        <div className="flex justify-center w-full md:order-2">
+          <Button primary label="Randomize!" margin={{ vertical: 'medium' }} size="large" onClick={select_team} />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center mx-auto w-max">
+          {
+            team.map(pokemon => <PokemonCard key={pokemon.id} pokemon={pokemon} />)
+          }
+        </div>
       </div>
     </Layout>
   )
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const prisma = new PrismaClient();
-
-  const pokemons = await prisma.pokemon.findMany({
-    orderBy: {
-      pokedex_number: 'asc'
-    }
-  });
+  const pokemons = await db.get_pokemons();
 
   return { props: { pokemons } };
 }

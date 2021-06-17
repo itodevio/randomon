@@ -6,9 +6,10 @@ import '../styles/index.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <Grommet theme={grommetTheme}>
+    <Grommet theme={grommetTheme} full>
       <Head>
         <title>Randomon</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </Grommet>

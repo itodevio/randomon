@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Button } from 'grommet';
+import { Header } from 'grommet';
 
 import style from './layout.module.scss';
 
-const Header: React.FC = () => {
+const HeaderComponent: React.FC = () => {
   return (
-    <nav className={style['header']}>
+    <Header pad={{ horizontal: 'large', vertical: 'medium'}}>
       <Link href="/">
         <a>
           <img 
@@ -19,11 +19,6 @@ const Header: React.FC = () => {
         </a>
       </Link>
       <div className={style['right-side-header']}>
-        <Link href="/">
-          <a>
-            <Button primary label="Randomize!" />
-          </a>
-        </Link>
         <Link href="/about">
           <a>About</a>
         </Link>
@@ -31,8 +26,8 @@ const Header: React.FC = () => {
           <a>Contact</a>
         </Link>
       </div>
-    </nav>
+    </Header>
   );
 };
 
-export default Header;
+export default HeaderComponent;
