@@ -16,6 +16,7 @@ model Pokemon {
   pokedex_number    Int           @unique
   types             Type[]        @relation()
   image_url         String?
+  games             Game[]
   // abilities         Ability[]
   // from_evolutions   Evolution[]   @relation("From")
   // to_evolutions     Evolution[]   @relation("To")
@@ -24,14 +25,40 @@ model Pokemon {
 model Type {
   id                        Int           @default(autoincrement())         @id
   name                      String
-  strong_against            Type[]        @relation("StrongAgainst")
-  weak_against              Type[]        @relation("WeakAgainst")
+  double_damage_to          Type[]        @relation("DoubleTo")
+  double_damage_from        Type[]        @relation("DoubleFrom")
+  half_damage_to            Type[]        @relation("HalfTo")
+  half_damage_from          Type[]        @relation("HalfFrom")
+  no_damage_to              Type[]        @relation("NoTo")
+  no_damage_from            Type[]        @relation("NoFrom")
   pokemons                  Pokemon[]
+  games                     Game[]
   // moves                     Move[]
 
   // ignorable relations
-  strong_against_relation   Type[]        @relation("StrongAgainst")
-  weak_against_relation     Type[]        @relation("WeakAgainst")
+  double_damage_to_relation   Type[]        @relation("DoubleTo")
+  double_damage_from_relation   Type[]        @relation("DoubleFrom")
+  half_damage_to_relation   Type[]        @relation("HalfTo")
+  half_damage_from_relation   Type[]        @relation("HalfFrom")
+  no_damage_to_relation   Type[]        @relation("NoTo")
+  no_damage_from_relation   Type[]        @relation("NoFrom")
+}
+
+model Game {
+  id                Int           @default(autoincrement())       @id
+  generation        Int
+  name              String
+  pokemons          Pokemon[]
+  regions           Region[]
+  types             Type[]
+
+  // moves             Move[]
+}
+
+model Region {
+  id                Int           @default(autoincrement())       @id
+  name              String
+  games             Game[]
 }
 
 // model Ability {

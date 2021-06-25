@@ -1,7 +1,9 @@
-import { Box, Text, Card, CardBody, CardHeader, CardFooter } from 'grommet';
+import {
+  Box, Text, Card, CardBody, CardHeader, CardFooter,
+} from 'grommet';
 import { Pokemon } from 'interfaces';
 import TypeColors from 'lib/type_colors';
-import React from 'react'
+import React from 'react';
 
 type Props = {
   pokemon: Pokemon
@@ -13,7 +15,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => (
       <Text size="large">{pokemon.name}</Text>
     </CardHeader>
     <CardBody pad="small">
-      <img src={pokemon.image_url} alt={`${pokemon.name}`} loading="eager" />
+      <img src={pokemon.image_url} alt={`${pokemon.name}`} loading="lazy" />
     </CardBody>
     <CardFooter>
       {
@@ -22,7 +24,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => (
             key={type.id}
             direction="row"
             background={TypeColors[type.name]}
-            pad={{ horizontal: "small", vertical: "xxsmall" }}
+            pad={{ horizontal: 'small', vertical: 'xxsmall' }}
             round
           >
             <Text color="#FFF">{type.name}</Text>
@@ -31,6 +33,6 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => (
       }
     </CardFooter>
   </Card>
-)
+);
 
 export default PokemonCard;

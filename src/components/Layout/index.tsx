@@ -1,17 +1,12 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { Box } from 'grommet';
 import Header from './Header';
 import Footer from './Footer';
-import { Box } from 'grommet';
-import style from './layout.module.scss';
 
-type Props = {
-  children: ReactNode;
-};
-
-const Layout: React.FC<Props> = (props) => (
+const Layout: React.FC = ({ children }) => (
   <Box fill>
     <Header />
-    <Box overflow="auto" flex>{props.children}</Box>
+    <Box overflow="auto" flex>{children}</Box>
     <Footer />
   </Box>
 );

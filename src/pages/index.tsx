@@ -27,12 +27,12 @@ const Home: React.FC<Props> = (props) => {
       }
     }
 
-    setTeam(new_team)
-  }, [])
+    setTeam(new_team);
+  }, []);
 
   useEffect(() => {
-    select_team()
-  }, [])
+    select_team();
+  }, []);
 
   return (
     <Layout>
@@ -43,18 +43,18 @@ const Home: React.FC<Props> = (props) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center mx-auto w-max">
           {
-            team.map(pokemon => <PokemonCard key={pokemon.id} pokemon={pokemon} />)
+            team.map((pokemon) => <PokemonCard key={pokemon.id} pokemon={pokemon} />)
           }
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const pokemons = await db.get_pokemons();
-
+  // console.log(await db.get_dash_pokemons());
   return { props: { pokemons } };
-}
+};
 
 export default Home;
