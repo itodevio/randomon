@@ -1,6 +1,6 @@
 import prisma from 'config/prisma';
 import axios from 'config/axios';
-
+import fs from 'fs';
 // * Pokemon Controller * //
 
 export const get_pokemons = async () => prisma.pokemon.findMany({
@@ -327,3 +327,223 @@ export const update_games = async () => {
     console.log(`Atualizou game ${game.name.charAt(0).toUpperCase() + game.name.slice(1)}`);
   }
 };
+
+export const get_database = async () => {
+  const games = await prisma.game.findMany({
+    orderBy: {
+      id: 'asc',
+    },
+  });
+
+  const pokemons = await prisma.pokemon.findMany({
+    orderBy: {
+      id: 'asc',
+    },
+    include: {
+      games: true,
+      types: true,
+    },
+  });
+
+  const types = await prisma.type.findMany({
+    orderBy: {
+      id: 'asc',
+    },
+    include: {
+      double_damage_from: true,
+      double_damage_to: true,
+      half_damage_from: true,
+      half_damage_to: true,
+      no_damage_from: true,
+      no_damage_to: true,
+      games: true,
+    },
+  });
+
+  const regions = await prisma.region.findMany({
+    orderBy: {
+      id: 'asc',
+    },
+    include: {
+      games: true,
+    },
+  });
+
+  fs.writeFile('database.json', JSON.stringify({
+    pokemons, types, games, regions,
+  }), (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
+
+// export const import_database = async () => {
+//   // * Criações * //
+//   // * Criar pokemons * //
+//   for (let i = 0; i < db.pokemons.length; i++) {
+//     const pokemon = db.pokemons[i];
+
+//     try {
+//       await prisma.pokemon.create({
+//         data: {
+//           id: pokemon.id,
+//           name: pokemon.name,
+//           pokedex_number: pokemon.pokedex_number,
+//           image_url: pokemon.image_url,
+//         },
+//       });
+
+//       console.log(`Criou ${pokemon.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   console.log('-----------------------------------');
+
+//   // * Criar types * //
+//   for (let i = 0; i < db.types.length; i++) {
+//     const type = db.types[i];
+
+//     try {
+//       await prisma.type.create({
+//         data: {
+//           id: type.id,
+//           name: type.name,
+//         },
+//       });
+
+//       console.log(`Criou ${type.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   // * Criar games * //
+//   for (let i = 0; i < db.games.length; i++) {
+//     const game = db.games[i];
+
+//     try {
+//       await prisma.game.create({
+//         data: {
+//           id: game.id,
+//           name: game.name,
+//           generation: game.generation,
+//         },
+//       });
+
+//       console.log(`Criou ${game.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   // * Criar regions * //
+//   for (let i = 0; i < db.regions.length; i++) {
+//     const region = db.regions[i];
+
+//     try {
+//       await prisma.region.create({
+//         data: {
+//           id: region.id,
+//           name: region.name,
+//         },
+//       });
+
+//       console.log(`Criou ${region.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   // * Atualizando * //
+//   // * Editar pokemons * //
+//   for (let i = 0; i < db.pokemons.length; i++) {
+//     const pokemon = db.pokemons[i];
+
+//     try {
+//       await prisma.pokemon.update({
+//         where: {
+//           id: pokemon.id,
+//         },
+//         data: {
+//           games: {
+//             set: pokemon.games.map(g => ({ id: g.id })),
+//           },
+//           types: {
+//             set: pokemon.types.map(t => ({ id: t.id })),
+//           },
+//         },
+//       });
+
+//       console.log(`Editou ${pokemon.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   console.log('-----------------------------------');
+
+//   // * Editar types * //
+//   for (let i = 0; i < db.types.length; i++) {
+//     const type = db.types[i];
+
+//     try {
+//       await prisma.type.update({
+//         where: {
+//           id: type.id,
+//         },
+//         data: {
+//           double_damage_from: {
+//             set: type.double_damage_from.map(t => ({ id: t.id })),
+//           },
+//           double_damage_to: {
+//             set: type.double_damage_to.map(t => ({ id: t.id })),
+//           },
+//           half_damage_from: {
+//             set: type.half_damage_from.map(t => ({ id: t.id })),
+//           },
+//           half_damage_to: {
+//             set: type.half_damage_to.map(t => ({ id: t.id })),
+//           },
+//           no_damage_from: {
+//             set: type.no_damage_from.map(t => ({ id: t.id })),
+//           },
+//           no_damage_to: {
+//             set: type.no_damage_to.map(t => ({ id: t.id })),
+//           },
+//           games: {
+//             set: type.games.map(g => ({ id: g.id })),
+//           },
+//         },
+//       });
+
+//       console.log(`Editou ${type.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   // * Editar regions * //
+//   for (let i = 0; i < db.regions.length; i++) {
+//     const region = db.regions[i];
+
+//     try {
+//       await prisma.region.update({
+//         where: {
+//           id: region.id,
+//         },
+//         data: {
+//           games: {
+//             set: region.games.map(g => ({ id: g.id })),
+//           },
+//         },
+//       });
+
+//       console.log(`Editou ${region.name}`);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+// };

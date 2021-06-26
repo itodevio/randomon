@@ -15,7 +15,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon }) => (
       <Text size="large">{pokemon.name}</Text>
     </CardHeader>
     <CardBody pad="small">
-      <img src={pokemon.image_url} alt={`${pokemon.name}`} loading="lazy" />
+      <img src={pokemon.image_url} alt={`${pokemon.name}`} width={96} height={96} loading="lazy" />
     </CardBody>
     <CardFooter>
       {

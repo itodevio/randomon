@@ -10,11 +10,11 @@ type Props = {
   pokemons: Pokemon[]
 }
 
-const Home: React.FC<Props> = (props) => {
+const Home: React.FC<Props> = ({ pokemons }) => {
   const [team, setTeam] = useState([]);
 
   const select_team = useCallback(() => {
-    const count = props.pokemons.length;
+    const count = pokemons.length;
     const ids = [];
     const new_team = [];
 
@@ -23,7 +23,7 @@ const Home: React.FC<Props> = (props) => {
 
       if (!ids.includes(n)) {
         ids.push(n);
-        new_team.push(props.pokemons[n]);
+        new_team.push(pokemons[n]);
       }
     }
 
@@ -34,11 +34,15 @@ const Home: React.FC<Props> = (props) => {
     select_team();
   }, []);
 
+  const randomize = () => {
+    select_team();
+  };
+
   return (
     <Layout>
       <div className="flex flex-col">
         <div className="flex justify-center w-full md:order-2">
-          <Button primary label="Randomize!" margin={{ vertical: 'medium' }} size="large" onClick={select_team} />
+          <Button primary label="Randomize!" margin={{ vertical: 'medium' }} size="large" onClick={randomize} />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center mx-auto w-max">
@@ -53,7 +57,6 @@ const Home: React.FC<Props> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const pokemons = await db.get_pokemons();
-  // console.log(await db.get_dash_pokemons());
   return { props: { pokemons } };
 };
 
