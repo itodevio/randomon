@@ -6,7 +6,7 @@ import Footer from './Footer';
 const Layout: React.FC = ({ children }) => (
   <Box fill>
     <Header />
-    <Box overflow="auto" flex>{children}</Box>
+    <Box style={{ minHeight: 'fit-content' }} flex>{children}</Box>
     <Footer />
   </Box>
 );

@@ -9,6 +9,7 @@ export const get_pokemons = async () => prisma.pokemon.findMany({
   },
   include: {
     types: true,
+    games: true,
   },
 });
 
@@ -96,6 +97,350 @@ export const add_types_to_pokemons = async () => {
       },
     );
   }
+};
+
+export const update_dashed_pokemons = async () => {
+  await prisma.pokemon.update({
+    where: {
+      id: 29,
+    },
+    data: {
+      name: 'Nidoran ♀',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 32,
+    },
+    data: {
+      name: 'Nidoran ♂',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 122,
+    },
+    data: {
+      name: 'Mr. Mime',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 250,
+    },
+    data: {
+      name: 'Ho-Oh',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 386,
+    },
+    data: {
+      name: 'Deoxys',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 413,
+    },
+    data: {
+      name: 'Wormadam',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 439,
+    },
+    data: {
+      name: 'Mime Jr.',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 474,
+    },
+    data: {
+      name: 'Porygon-Z',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 487,
+    },
+    data: {
+      name: 'Giratina',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 492,
+    },
+    data: {
+      name: 'Shaymin',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 550,
+    },
+    data: {
+      name: 'Basculin',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 555,
+    },
+    data: {
+      name: 'Darmanitan',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 641,
+    },
+    data: {
+      name: 'Tornadus',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 642,
+    },
+    data: {
+      name: 'Thundurus',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 645,
+    },
+    data: {
+      name: 'Landorus',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 647,
+    },
+    data: {
+      name: 'Keldeo',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 648,
+    },
+    data: {
+      name: 'Meloetta',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 678,
+    },
+    data: {
+      name: 'Meowstic',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 681,
+    },
+    data: {
+      name: 'Aegislash',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 710,
+    },
+    data: {
+      name: 'Pumpkaboo',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 711,
+    },
+    data: {
+      name: 'Gourgeist',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 741,
+    },
+    data: {
+      name: 'Oricorio',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 745,
+    },
+    data: {
+      name: 'Lycanroc',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 746,
+    },
+    data: {
+      name: 'Wishiwashi',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 772,
+    },
+    data: {
+      name: 'Type: Null',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 774,
+    },
+    data: {
+      name: 'Minior',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 778,
+    },
+    data: {
+      name: 'Mimikyu',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 785,
+    },
+    data: {
+      name: 'Tapu Koko',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 786,
+    },
+    data: {
+      name: 'Tapu Lele',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 787,
+    },
+    data: {
+      name: 'Tapu Bulu',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 788,
+    },
+    data: {
+      name: 'Tapu Fini',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 849,
+    },
+    data: {
+      name: 'Toxtricity',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 866,
+    },
+    data: {
+      name: 'Mr. Rime',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 875,
+    },
+    data: {
+      name: 'Eiscue',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 876,
+    },
+    data: {
+      name: 'Indeedee',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 888,
+    },
+    data: {
+      name: 'Zacian',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 889,
+    },
+    data: {
+      name: 'Zamazenta',
+    },
+  });
+
+  await prisma.pokemon.update({
+    where: {
+      id: 892,
+    },
+    data: {
+      name: 'Urshifu',
+    },
+  });
 };
 
 // export const add_games_to_pokemon = async () => {
