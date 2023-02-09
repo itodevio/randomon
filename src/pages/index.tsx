@@ -36,7 +36,13 @@ const Home: React.FC<Props> = ({ pokemons, games }) => {
     select_team();
   }, [game]);
 
-  const randomize = () => {
+  const randomize = async () => {
+    try {
+      const res = await fetch('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy');
+      console.log(await res.text())
+    } catch (err) {
+      console.log(err)
+    }
     select_team();
   };
 
